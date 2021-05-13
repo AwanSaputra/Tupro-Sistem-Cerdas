@@ -1,5 +1,10 @@
+from typing import Any
 import pandas as pd
 import numpy as np
+import xlsxwriter
+book = xlsxwriter.Workbook('luaran.xlsx')
+sheet = book._add_sheet('Nilai')
+
 ipkBurukmin = 0
 ipkBurukmax = 2.75
 
@@ -272,9 +277,15 @@ def main():
         t1 = time() - t0
         print("Waktu Eksekusi Fuzzy = ", t1)
 
+    row = 0
+    column = 0
     c = sorted(data, reverse=True)
     print(c)
     print("data paling besar adalah : ", max(data))
+    datfra = pd.DataFrame()
+    datfra['Nilai Kelulusan'] = c[0:10]
+    datfra.to_excel('luaran.xlsx', index=False)
+
     return 0
 
 
