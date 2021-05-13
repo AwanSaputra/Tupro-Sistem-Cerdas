@@ -1,9 +1,6 @@
 from typing import Any
 import pandas as pd
 import numpy as np
-import xlsxwriter
-book = xlsxwriter.Workbook('luaran.xlsx')
-sheet = book._add_sheet('Nilai')
 
 ipkBurukmin = 0
 ipkBurukmax = 2.75
