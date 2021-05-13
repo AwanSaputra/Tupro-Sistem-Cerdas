@@ -157,7 +157,7 @@ def fuzzyRules(ipk, gaji):
     print("Nilai Kelulusan Tinggi : ", nilaikelulusantinggi)
 
 
-def centroidMethod(nilaikelulusanrendah, nilaikelulusantinggi):
+def Defuzzifikasi(nilaikelulusanrendah, nilaikelulusantinggi):
 
     global hasil
     hasil = (((10+20+30+40+50+60)*nilaikelulusanrendah)+((70+80+90+100) *
@@ -207,12 +207,12 @@ def derajatIpk(ipk):
     global derajatipkcukup
     global derajatipkbagus
 
-    derajatipkburuk = fungsiKeanggotaanTrapesium(
-        ipkBurukmin, ipkBurukmin, 2, ipkBurukmax, ipk)
+    derajatipkburuk = fungsiKeanggotaanSegitiga(
+        ipkBurukmin, 2, ipkBurukmax, ipk)
     derajatipkcukup = fungsiKeanggotaanSegitiga(
         ipkCukupmin, 2.75, ipkCukupmax, ipk)
-    derajatipkbagus = fungsiKeanggotaanTrapesium(
-        ipkBagusmin, 3.25, ipkBagusmax, ipkBagusmax, ipk)
+    derajatipkbagus = fungsiKeanggotaanSegitiga(
+        ipkBagusmin, 3.25, ipkBagusmax, ipk)
 
     print("Derajat IPK Buruk : ", derajatipkburuk)
     print("Derajat IPK Cukup : ", derajatipkcukup)
@@ -267,7 +267,7 @@ def main():
 
         print("\n========== PROSES DEFUZZYFICATION ==========\n")
 
-        DEFUZZYFICATION = centroidMethod(
+        DEFUZZYFICATION = Defuzzifikasi(
             nilaikelulusanrendah, nilaikelulusantinggi)
         print(DEFUZZYFICATION)
         DEFUZZY = data.append(DEFUZZYFICATION)
@@ -277,7 +277,8 @@ def main():
     row = 0
     column = 0
     c = sorted(data, reverse=True)
-    print(c)
+    print("End Of Looping")
+    print("Nilai Kelulusan : ", c)
     print("data paling besar adalah : ", max(data))
     datfra = pd.DataFrame()
     datfra['Nilai Kelulusan'] = c[0:10]
