@@ -10,7 +10,7 @@ ipkCukupmin = 2
 ipkCukupmax = 3.25
 
 ipkBagusmin = 2.75
-ipkBagusmax = 4.00
+ipkBagusmax = 4.05
 
 gajiKecilmin = 0
 gajiKecilmax = 3
@@ -208,18 +208,18 @@ def derajatIpk(ipk):
     global derajatipkcukup
     global derajatipkbagus
 
-    # derajatipkburuk = fungsiKeanggotaanSegitiga(
-    #     ipkBurukmin, 2, ipkBurukmax, ipk)
-    # derajatipkcukup = fungsiKeanggotaanSegitiga(
-    #     ipkCukupmin, 2.75, ipkCukupmax, ipk)
-    # derajatipkbagus = fungsiKeanggotaanSegitiga(
-    #     ipkBagusmin, 3.25, ipkBagusmax, ipk)
-    derajatipkburuk = fungsiKeanggotaanTrapesium(
-        ipkBurukmin, ipkBurukmin, 2, ipkBurukmax, ipk)
+    derajatipkburuk = fungsiKeanggotaanSegitiga(
+        ipkBurukmin, 2, ipkBurukmax, ipk)
     derajatipkcukup = fungsiKeanggotaanSegitiga(
         ipkCukupmin, 2.75, ipkCukupmax, ipk)
-    derajatipkbagus = fungsiKeanggotaanTrapesium(
-        ipkBagusmin, 3.25, ipkBagusmax, ipkBagusmax, ipk)
+    derajatipkbagus = fungsiKeanggotaanSegitiga(
+        ipkBagusmin, 3.25, ipkBagusmax, ipk)
+    # derajatipkburuk = fungsiKeanggotaanTrapesium(
+    #     ipkBurukmin, ipkBurukmin, 2, ipkBurukmax, ipk)
+    # derajatipkcukup = fungsiKeanggotaanSegitiga(
+    #     ipkCukupmin, 2.75, ipkCukupmax, ipk)
+    # derajatipkbagus = fungsiKeanggotaanTrapesium(
+    #     ipkBagusmin, 3.25, ipkBagusmax, ipkBagusmax, ipk)
 
     print("Derajat IPK Buruk : ", derajatipkburuk)
     print("Derajat IPK Cukup : ", derajatipkcukup)
