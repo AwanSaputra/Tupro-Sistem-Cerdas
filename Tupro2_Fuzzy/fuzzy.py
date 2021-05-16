@@ -1,6 +1,7 @@
 from typing import Any
 import pandas as pd
 import numpy as np
+from operator import itemgetter
 
 ipkBurukmin = 0
 ipkBurukmax = 2.75
@@ -207,12 +208,18 @@ def derajatIpk(ipk):
     global derajatipkcukup
     global derajatipkbagus
 
-    derajatipkburuk = fungsiKeanggotaanSegitiga(
-        ipkBurukmin, 2, ipkBurukmax, ipk)
+    # derajatipkburuk = fungsiKeanggotaanSegitiga(
+    #     ipkBurukmin, 2, ipkBurukmax, ipk)
+    # derajatipkcukup = fungsiKeanggotaanSegitiga(
+    #     ipkCukupmin, 2.75, ipkCukupmax, ipk)
+    # derajatipkbagus = fungsiKeanggotaanSegitiga(
+    #     ipkBagusmin, 3.25, ipkBagusmax, ipk)
+    derajatipkburuk = fungsiKeanggotaanTrapesium(
+        ipkBurukmin, ipkBurukmin, 2, ipkBurukmax, ipk)
     derajatipkcukup = fungsiKeanggotaanSegitiga(
         ipkCukupmin, 2.75, ipkCukupmax, ipk)
-    derajatipkbagus = fungsiKeanggotaanSegitiga(
-        ipkBagusmin, 3.25, ipkBagusmax, ipk)
+    derajatipkbagus = fungsiKeanggotaanTrapesium(
+        ipkBagusmin, 3.25, ipkBagusmax, ipkBagusmax, ipk)
 
     print("Derajat IPK Buruk : ", derajatipkburuk)
     print("Derajat IPK Cukup : ", derajatipkcukup)
@@ -247,7 +254,7 @@ def main():
     from time import time
 
     data = []
-    n = df.No.count()  # int(input("Masukkan jumlah data : "))
+    n = df.ID.count()  # int(input("Masukkan jumlah data : "))
 
     for i in range(0, n):
 
@@ -276,14 +283,17 @@ def main():
 
     row = 0
     column = 0
-    c = sorted(data, reverse=True)
+    cek = list(zip(data, df.ID))
+    print(cek)
+    c = sorted(cek, key=itemgetter(0), reverse=True)
     print("End Of Looping")
     print("Nilai Kelulusan : ", c)
     print("data paling besar adalah : ", max(data))
+    nk, nim = zip(*c)
     datfra = pd.DataFrame()
-    datfra['Nilai Kelulusan'] = c[0:10]
+    datfra['ID'] = nim[0:10]
+    datfra['Nilai Kelulusan'] = nk[0:10]
     datfra.to_excel('luaran.xlsx', index=False)
-
     return 0
 
 
