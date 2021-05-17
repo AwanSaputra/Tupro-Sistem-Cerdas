@@ -30,10 +30,6 @@ df = pd.read_excel('masukan.xlsx')
 def inRange(minimal, maximal, input):
     minimal = min(minimal, maximal)
     maximal = max(minimal, maximal)
-
-    # print minimal
-    # print maximal
-
     if((input > minimal) and (input < maximal)):
         return 1
     else:
@@ -214,12 +210,6 @@ def derajatIpk(ipk):
         ipkCukupmin, 2.75, ipkCukupmax, ipk)
     derajatipkbagus = fungsiKeanggotaanSegitiga(
         ipkBagusmin, 3.25, ipkBagusmax, ipk)
-    # derajatipkburuk = fungsiKeanggotaanTrapesium(
-    #     ipkBurukmin, ipkBurukmin, 2, ipkBurukmax, ipk)
-    # derajatipkcukup = fungsiKeanggotaanSegitiga(
-    #     ipkCukupmin, 2.75, ipkCukupmax, ipk)
-    # derajatipkbagus = fungsiKeanggotaanTrapesium(
-    #     ipkBagusmin, 3.25, ipkBagusmax, ipkBagusmax, ipk)
 
     print("Derajat IPK Buruk : ", derajatipkburuk)
     print("Derajat IPK Cukup : ", derajatipkcukup)
@@ -254,12 +244,12 @@ def main():
     from time import time
 
     data = []
-    n = df.ID.count()  # int(input("Masukkan jumlah data : "))
+    n = df.ID.count()
 
     for i in range(0, n):
 
-        ipk = df.IPK[i]  # float(input("Masukkan IPK Anda : "))
-        gaji = df.Gaji[i]  # float(input("Masukkan gaji anda : "))
+        ipk = df.IPK[i]
+        gaji = df.Gaji[i]
         t0 = time()
 
         print("\n==========  PROSES FUZZYFICATION   ==========\n")
