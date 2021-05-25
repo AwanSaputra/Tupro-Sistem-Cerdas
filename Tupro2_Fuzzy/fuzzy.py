@@ -36,6 +36,82 @@ def inRange(minimal, maximal, input):
         return 0
 
 
+def derajatIpk(ipk):
+
+    global derajatipkburuk
+    global derajatipkcukup
+    global derajatipkbagus
+
+    derajatipkburuk = fungsiKeanggotaanSegitiga(
+        ipkBurukmin, 2, ipkBurukmax, ipk)
+    derajatipkcukup = fungsiKeanggotaanSegitiga(
+        ipkCukupmin, 2.75, ipkCukupmax, ipk)
+    derajatipkbagus = fungsiKeanggotaanSegitiga(
+        ipkBagusmin, 3.25, ipkBagusmax, ipk)
+
+    print("Derajat IPK Buruk : ", derajatipkburuk)
+    print("Derajat IPK Cukup : ", derajatipkcukup)
+    print("Derajat IPK Bagus : ", derajatipkbagus)
+
+
+def derajatGaji(gaji):
+
+    global derajatgajikecil
+    global derajatgajisedang
+    global derajatgajibesar
+    global derajatgajisangatbesar
+    global derajatgajibesar
+
+    derajatgajikecil = fungsiKeanggotaanTrapesium(
+        gajiKecilmin, gajiKecilmin, 1, gajiKecilmax, gaji)
+    derajatgajisedang = fungsiKeanggotaanTrapesium(
+        gajiSedangmin, 3, 4, gajiSedangmax, gaji)
+    derajatgajibesar = fungsiKeanggotaanTrapesium(
+        gajiBesarmin, 6, 7, gajiBesarmax, gaji)
+    derajatgajisangatbesar = fungsiKeanggotaanTrapesium(
+        gajiSangatBesarmin, 12, gajiSangatBesarmax, gajiSangatBesarmax, gaji)
+
+    print("Derajat Gaji Kecil        : ", derajatgajikecil)
+    print("Derajat Gaji Sedang       : ", derajatgajisedang)
+    print("Derajat Gaji besar        : ", derajatgajibesar)
+    print("Derajat Gaji Sangat Besar : ", derajatgajisangatbesar)
+
+
+def fungsiKeanggotaanSegitiga(a, b, c, x):
+
+    if ((x > a) and (x < b)):
+        derajatKeanggotaan = (x-a)/(b-a)
+
+    elif (x == b):
+        derajatKeanggotaan = 1
+
+    elif ((x > b) and (x < c)):
+
+        derajatKeanggotaan = -((x-c)/(c-b))
+
+    else:
+        derajatKeanggotaan = 0
+
+    return derajatKeanggotaan
+
+
+def fungsiKeanggotaanTrapesium(a, b, c, d, x):
+
+    if ((x > a) and (x < b)):
+        derajatKeanggotaan = (x-a)/(b-a)
+
+    elif ((x >= b) and (x <= c)):
+        derajatKeanggotaan = 1
+
+    elif ((x > c) and (x < d)):
+        derajatKeanggotaan = -((x-d)/(d-c))
+
+    else:
+        derajatKeanggotaan = 0
+
+    return derajatKeanggotaan
+
+
 def fuzzyRules(ipk, gaji):
     global nilaikelulusanrendah
     global nilaikelulusantinggi
@@ -161,82 +237,6 @@ def Defuzzifikasi(nilaikelulusanrendah, nilaikelulusantinggi):
              nilaikelulusantinggi))/((6*nilaikelulusanrendah)+(4*nilaikelulusantinggi))
     print("Nilai Kelulusan : ", hasil)
     return hasil
-
-
-def fungsiKeanggotaanSegitiga(a, b, c, x):
-
-    if ((x > a) and (x < b)):
-        derajatKeanggotaan = (x-a)/(b-a)
-
-    elif (x == b):
-        derajatKeanggotaan = 1
-
-    elif ((x > b) and (x < c)):
-
-        derajatKeanggotaan = -((x-c)/(c-b))
-
-    else:
-        derajatKeanggotaan = 0
-
-    return derajatKeanggotaan
-
-
-def fungsiKeanggotaanTrapesium(a, b, c, d, x):
-
-    if ((x > a) and (x < b)):
-        derajatKeanggotaan = (x-a)/(b-a)
-
-    elif ((x >= b) and (x <= c)):
-        derajatKeanggotaan = 1
-
-    elif ((x > c) and (x < d)):
-        derajatKeanggotaan = -((x-d)/(d-c))
-
-    else:
-        derajatKeanggotaan = 0
-
-    return derajatKeanggotaan
-
-
-def derajatIpk(ipk):
-
-    global derajatipkburuk
-    global derajatipkcukup
-    global derajatipkbagus
-
-    derajatipkburuk = fungsiKeanggotaanSegitiga(
-        ipkBurukmin, 2, ipkBurukmax, ipk)
-    derajatipkcukup = fungsiKeanggotaanSegitiga(
-        ipkCukupmin, 2.75, ipkCukupmax, ipk)
-    derajatipkbagus = fungsiKeanggotaanSegitiga(
-        ipkBagusmin, 3.25, ipkBagusmax, ipk)
-
-    print("Derajat IPK Buruk : ", derajatipkburuk)
-    print("Derajat IPK Cukup : ", derajatipkcukup)
-    print("Derajat IPK Bagus : ", derajatipkbagus)
-
-
-def derajatGaji(gaji):
-
-    global derajatgajikecil
-    global derajatgajisedang
-    global derajatgajibesar
-    global derajatgajisangatbesar
-    global derajatgajibesar
-
-    derajatgajikecil = fungsiKeanggotaanTrapesium(
-        gajiKecilmin, gajiKecilmin, 1, gajiKecilmax, gaji)
-    derajatgajisedang = fungsiKeanggotaanTrapesium(
-        gajiSedangmin, 3, 4, gajiSedangmax, gaji)
-    derajatgajibesar = fungsiKeanggotaanTrapesium(
-        gajiBesarmin, 6, 7, gajiBesarmax, gaji)
-    derajatgajisangatbesar = fungsiKeanggotaanTrapesium(
-        gajiSangatBesarmin, 12, gajiSangatBesarmax, gajiSangatBesarmax, gaji)
-
-    print("Derajat Gaji Kecil        : ", derajatgajikecil)
-    print("Derajat Gaji Sedang       : ", derajatgajisedang)
-    print("Derajat Gaji besar        : ", derajatgajibesar)
-    print("Derajat Gaji Sangat Besar : ", derajatgajisangatbesar)
 
 
 def main():
